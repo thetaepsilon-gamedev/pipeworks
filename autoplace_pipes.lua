@@ -147,6 +147,18 @@ function pipeworks.scan_pipe_surroundings(pos)
 		pzp = f or pzp
 	end
 
+-- ...pressure gauges...
+
+	local match,a,b,c,d,e,f = pipeworks.get_axis_dir(nodetable, "pipeworks:pressure_gauge")
+	if match then
+		pxm = a or pxm
+		pxp = b or pxp
+		pym = c or pym
+		pyp = d or pyp
+		pzm = e or pzm
+		pzp = f or pzp
+	end
+
 -- ...sealed pipe entry/exit...
 
 	local match,a,b,c,d,e,f = pipeworks.get_axis_dir(nodetable, "pipeworks:entry_panel")

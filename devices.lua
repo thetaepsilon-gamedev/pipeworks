@@ -476,6 +476,79 @@ minetest.register_node("pipeworks:flow_sensor_loaded", {
 	on_rotate = pipeworks.fix_after_rotation
 })
 
+-- pressure gauge
+
+minetest.register_node("pipeworks:pressure_gauge_empty", {
+	description = "Pressure Gauge",
+	drawtype = "mesh",
+	mesh = "pipeworks_pressure_gauge.obj",
+	tiles = {
+		"pipeworks_pressure_gauge.png",
+		"pipeworks_pressure_gauge_0.png"
+	},
+	sunlight_propagates = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {snappy=3, pipe=1},
+	sounds = default.node_sound_wood_defaults(),
+	walkable = true,
+	on_place = pipeworks.rotate_on_place,
+	after_dig_node = function(pos)
+		pipeworks.scan_for_pipe_objects(pos)
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{ -2/16, -2/16, -8/16, 2/16, 2/16, 8/16 },
+			{ -3/16, -3/16, -4/16, 3/16, 3/16, 4/16 },
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{ -2/16, -2/16, -8/16, 2/16, 2/16, 8/16 },
+			{ -3/16, -3/16, -4/16, 3/16, 3/16, 4/16 },
+		}
+	},
+	on_rotate = pipeworks.fix_after_rotation
+})
+
+minetest.register_node("pipeworks:pressure_gauge_loaded", {
+	description = "Pressure Gauge",
+	drawtype = "mesh",
+	mesh = "pipeworks_pressure_gauge.obj",
+	tiles = {
+		"pipeworks_pressure_gauge.png",
+		"pipeworks_pressure_gauge_3.png"
+	},
+	sunlight_propagates = true,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {snappy=3, pipe=1, not_in_creative_inventory=1},
+	sounds = default.node_sound_wood_defaults(),
+	walkable = true,
+	on_place = pipeworks.rotate_on_place,
+	after_dig_node = function(pos)
+		pipeworks.scan_for_pipe_objects(pos)
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{ -2/16, -2/16, -8/16, 2/16, 2/16, 8/16 },
+			{ -3/16, -3/16, -4/16, 3/16, 3/16, 4/16 },
+		}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{ -2/16, -2/16, -8/16, 2/16, 2/16, 8/16 },
+			{ -3/16, -3/16, -4/16, 3/16, 3/16, 4/16 },
+		}
+	},
+	drop = "pipeworks:pressure_gauge_empty",
+	on_rotate = pipeworks.fix_after_rotation
+})
+
 -- tanks
 
 for fill = 0, 10 do
