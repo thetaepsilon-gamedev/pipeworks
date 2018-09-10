@@ -164,9 +164,7 @@ local get_neighbour_positions = function(pos, node)
 			local directional = pipeworks.flowables.list.directional[nodename]
 			if directional then
 				--pipeworks.logger(dname.."directionality test for offset "..formatvec(offset))
-				local towards_origin = vector.multiply(offset, -1)
-				--pipeworks.logger(dname.."vector passed to directionfn: "..formatvec(towards_origin))
-				local result = directional.directionfn(neighbour, towards_origin)
+				local result = directional.directionfn(neighbour, offset)
 				--pipeworks.logger(dname.."result: "..tostring(result))
 				if result then
 					local n = get_pressure_access(npos)

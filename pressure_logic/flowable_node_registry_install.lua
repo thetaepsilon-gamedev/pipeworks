@@ -59,9 +59,10 @@ register.directional_vertical_fixed = function(nodename, topside)
 	local y
 	if topside then y = 1 else y = -1 end
 	local side = { x=0, y=y, z=0 }
+	local inwards = { x=0, y=-y, z=0 }
 	local neighbourfn = function(node) return { side } end
 	local directionfn = function(node, direction)
-		return vector.equals(direction, side)
+		return vector.equals(direction, inwards)
 	end
 	register.directional(nodename, neighbourfn, directionfn)
 end
@@ -107,7 +108,8 @@ register.directional_horizonal_rotate = function(nodename, doubleended)
 	local directionfn = function(node, direction)
 		local result = false
 		for index, endvec in ipairs(getends(node)) do
-			if vector.equals(direction, endvec) then result = true end
+			local inwards = vector.multiply(endvec, -1)
+			if vector.equals(direction, inwards) then result = true end
 		end
 		return result
 	end
