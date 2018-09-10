@@ -151,14 +151,19 @@ local get_neighbour_positions = function(pos, node)
 
 	-- then, check each possible neighbour to see if they can be reached from this node.
 	local connections = {}
+	-- table.insert, wot r u doin
+	local index = 1
+	local insert = function(v)
+		connections[index] = v
+		index = index + 1
+	end
 	for index, offset in ipairs(candidates) do
 		local npos = vector.add(pos, offset)
 		local neighbour = minetest.get_node(npos)
 		local nodename = neighbour.name
 		local is_simple = (pipeworks.flowables.list.simple[nodename])
 		if is_simple then
-			local n = get_pressure_access(npos)
-			table.insert(connections, n)
+			insert(npos)
 		else
 			-- if target node is also directional, check if it agrees it can flow in that direction
 			local directional = pipeworks.flowables.list.directional[nodename]
@@ -167,14 +172,21 @@ local get_neighbour_positions = function(pos, node)
 				local result = directional.directionfn(neighbour, offset)
 				--pipeworks.logger(dname.."result: "..tostring(result))
 				if result then
-					local n = get_pressure_access(npos)
-					table.insert(connections, n)
+					insert(npos)
 				end
 			end
 		end
 	end
 
 	return connections
+end
+local get_neighbour_connections = function(bpos, node)
+	local positions = get_neighbour_positions(bpos, node)
+	local conn = {}
+	for k, npos in pairs(positions) do
+		conn[k] = get_pressure_access(npos)
+	end
+	return conn
 end
 
 
@@ -190,7 +202,7 @@ flowlogic.balance_pressure = function(pos, node, currentpressure)
 	local totalv = currentpressure
 	local totalc = 1
 
-	local connections = get_neighbour_positions(pos, node)
+	local connections = get_neighbour_connections(pos, node)
 
 	-- for each neighbour, add neighbour's pressure to the total to balance out
 	for _, neighbour in ipairs(connections) do
