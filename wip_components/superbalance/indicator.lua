@@ -3,7 +3,7 @@ local tex = {t,t,t,t,t,t}
 local n = "superbalance:indicator"
 
 
-local limit = 3.0
+local limit = 0.5
 local step = function(self, dtime)
 	local age = self.age or 0
 	age = age + dtime
