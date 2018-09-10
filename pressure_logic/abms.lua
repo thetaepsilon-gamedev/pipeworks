@@ -66,6 +66,7 @@ local get_pressure_access = function(pos)
 		end
 	}
 end
+flowlogic.get_pressure_access = get_pressure_access
 
 
 -- logging is unreliable when something is crashing...
