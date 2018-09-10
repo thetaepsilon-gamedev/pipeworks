@@ -10,14 +10,21 @@ local mk_collector = function()
 	end
 	return visitor, hashset
 end
--- TODO: age check goes here
+
+local max_age = 5	-- TODO: configurable?
+local testvertex = function(pos, hash)
+	return pos.age <= max_age
+end
 
 local nn = "com.github.thetaepsilon.minetest.libmt_node_network"
 local newsearchraw = mtrequire(nn..".floodsearch.bfmap").new
 local do_search = function(pos)
 	pos.age = 0
 	local visitor, hashset = mk_collector()
-	local callbacks = {visitor=visitor}
+	local callbacks = {
+		visitor = visitor,
+		testvertex = testvertex,
+	}
 	local ihash = hash(pos)
 	local opts = nil
 
