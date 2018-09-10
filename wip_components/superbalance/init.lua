@@ -23,7 +23,7 @@ local balance = dofile(mp.."balance_node_set.lua")
 
 
 -- "whack" a pipe to make it do a long balance and get water moving again
-local debug = true
+local debug = false
 local whack = function(bpos, always_show)
 	local positions = do_search(bpos)
 
