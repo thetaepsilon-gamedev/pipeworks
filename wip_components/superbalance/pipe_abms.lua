@@ -5,7 +5,7 @@ local whack = _mod.whack
 minetest.register_abm({
 	label = "pipeworks long balance",
 	interval = 2,
-	chance = 10,
+	chance = 20,
 	nodenames = { "pipeworks:pipe_3_empty" },
 	catch_up = false,
 	action = function(pos)
