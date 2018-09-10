@@ -40,6 +40,9 @@ _mod.whack = whack
 -- load manual debug tool
 dofile(mp.."debug_tool.lua")
 
+-- register long balance ABM on pipes
+dofile(mp.."pipe_abms.lua")
+
 
 
 
