@@ -11,7 +11,7 @@ local mk_collector = function()
 	return visitor, hashset
 end
 
-local max_age = 5	-- TODO: configurable?
+local max_age = 15	-- TODO: configurable?
 local testvertex = function(pos, hash)
 	return pos.age <= max_age
 end
