@@ -20,6 +20,9 @@ local balance = dofile(mp.."balance_node_set.lua")
 
 
 
+
+
+-- "whack" a pipe to make it do a long balance and get water moving again
 local whack = function(bpos)
 	local positions = do_search(bpos)
 
@@ -28,26 +31,12 @@ local whack = function(bpos)
 	end
 	balance(positions)
 end
-local use = function(itemstack, user, pointed)
-	if pointed.type == "node" then
-		whack(pointed.under)
-	end
-end
-local place = function(itemstack, user, pointed)
-	if user:is_player() then
-		local pos = pointed.under
-		local v = minetest.get_meta(pos):get_float("pipeworks.water_pressure")
-		local name = user:get_player_name()
-		minetest.chat_send_player(name, "pressure = "..v)
-	end
-end
-local inv = "superbalance_indicator.png"
-local whacker = "superbalance:debug_tool"
-minetest.register_craftitem(whacker, {
-	inventory_image = inv,
-	on_use = use,
-	on_place = place,
-})
+_mod.whack = whack
+
+-- load manual debug tool
+dofile(mp.."debug_tool.lua")
+
+
 
 
 
