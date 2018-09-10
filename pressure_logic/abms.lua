@@ -180,6 +180,8 @@ local get_neighbour_positions = function(pos, node)
 
 	return connections
 end
+flowlogic.get_neighbour_positions = get_neighbour_positions
+
 local get_neighbour_connections = function(bpos, node)
 	local positions = get_neighbour_positions(bpos, node)
 	local conn = {}
