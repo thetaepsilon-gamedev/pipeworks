@@ -5,7 +5,7 @@ local whack = _mod.whack
 
 local use = function(itemstack, user, pointed)
 	if pointed.type == "node" then
-		whack(pointed.under)
+		whack(pointed.under, true)
 	end
 end
 local place = function(itemstack, user, pointed)

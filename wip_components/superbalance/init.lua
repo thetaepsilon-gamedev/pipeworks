@@ -23,11 +23,15 @@ local balance = dofile(mp.."balance_node_set.lua")
 
 
 -- "whack" a pipe to make it do a long balance and get water moving again
-local whack = function(bpos)
+local debug = true
+local whack = function(bpos, always_show)
 	local positions = do_search(bpos)
 
-	for hash, npos in pairs(positions) do
-		minetest.add_entity(npos, entname)
+	local show = debug or always_show
+	if show then
+		for hash, npos in pairs(positions) do
+			minetest.add_entity(npos, entname)
+		end
 	end
 	balance(positions)
 end
